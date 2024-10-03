@@ -4,7 +4,7 @@ from rest_framework import status, permissions
 from django.http import Http404
 from .models import Project, Pledge
 from .serializers import ProjectSerializer, PledgeSerializer, ProjectDetailSerializer, PledgeDetailSerializer
-from .permissions import IsOwnerOrReadOnly, IsNotOwnerOrReadOnly, IsSupporterOrReadOnly
+from .permissions import IsOwnerOrReadOnly, IsSupporterOrReadOnly, CanPledge
 
 
 class ProjectList(APIView):
@@ -73,7 +73,7 @@ class ProjectDetail(APIView):
 class PledgeList(APIView):
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly,
-        # IsNotOwnerOrReadOnly  ## This is permissions class is currently not working
+        CanPledge
     ]
     
     def get(self, request):
