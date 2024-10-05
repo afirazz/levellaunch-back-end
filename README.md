@@ -2,25 +2,31 @@
 Crowdfunding back end created by :star: Afira Zulkifli :star:
 
 ## About
-{{ Include a short description of your website concept here. }}
+Level Launch is a crowdfunding website with the aim of connecting people who make games with people who love to play games.
 
 ### Intended Audience/User Stories
-{{ Who are your intended audience? How will they use the website? }}
+- **Game designers, developers, and publishers** can use this platform to raise funds directly from their players to launch new games, downloadable content (DLC) or expansion packs for existing games.
+- **Gamers** can use this platform to fund new games that pique their interest or to support existing games that they love by funding DLCs or expansions.
 
 ### Front End Pages/Functionality
 - Home Page / Index
-    - Login / Create Account
-    - 
-    - 
+    - Login or create a new user account.
+    - View a selection of featured projects, recently opened projects, or recently funded projects.
+    - No login required to view this page.
 - All Projects Page
-    - 
-    - 
+    - View all open projects that are currently accepting pledges (no login required).
+    - Create a new project (must be logged in).
 - Project Detail Page
-    - 
-    - 
+    - View one project's details.
+    - View all pledges that have been made to the project.
+    - No login required to view this page.
+    - Update project details (must be logged in as the project owner).
+    - Delete the project (must be logged in as the project owner).
+    - Create a pledge to the project (must be logged in and not the project owner).
 - User Profile Page
-    - 
-    - 
+    - View one user's profile details (no login required).
+    - Update user details (must be logged in as the user).
+    - Delete the user account (must be logged in as the user).
 
 ## Back End Demonstration
 ### User Creation
@@ -105,8 +111,6 @@ Pledge request body:
 }
 ```
 
-#### 
-
 ### Database Schema
 **Note:** The `ProjectUpdate` model and associated views, URLs and serializers have not been implemented yet, however its implementation would be similar to that of the `Pledge` model.
 
@@ -117,13 +121,13 @@ Pledge request body:
 - [ ] Add new superuser permissions allow a superuser to update and delete any project, pledge, or user.
 - [ ] Paginated responses to project and pledge `GET` requests.
 
-# Requirements
-## Project Requirements
+## Requirements
+### Project Requirements
 This crowdfunding project must:
 
 - [x] Be separated into two distinct projects: an API built using the Django Rest Framework and a website built using React. *(AZ Note: Coming soon on the React front end!)*
 - [x] Have a cool name, bonus points if it includes a pun and/or missing vowels.
-- [ ] Have a clear target audience.
+- [x] Have a clear target audience.
 - [x] Have user accounts. A user should have at least the following attributes:
   - [x] Username
   - [x] Email address
@@ -149,10 +153,10 @@ This crowdfunding project must:
 - [x] Use Token Authentication, including an endpoint to obtain a token along with the current user's details.
 - [ ] Implement responsive design. *(AZ Note: Coming soon on the React front end!)*
 
-## Submission Requirements
+### Submission Requirements
 The following should be included in this readme doc:
 
-- [ ] A link to the deployed project. *(AZ Note: Incomplete because I'm submitting this assignment early - watch this space!)*
+- [ ] A link to the deployed project. *(AZ Note: Incomplete because I'm submitting this assignment 3 weeks early - watch this space!)*
 - [x] A screenshot of Insomnia, demonstrating a successful GET method for any endpoint.
 - [x] A screenshot of Insomnia, demonstrating a successful POST method for any endpoint.
 - [x] A screenshot of Insomnia, demonstrating a token being returned.
