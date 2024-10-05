@@ -27,7 +27,7 @@ Crowdfunding back end created by :star: Afira Zulkifli :star:
 Steps to create a new user on Insomnia:
 
 1. Create a new HTTP request.
-2. Change the request method to POST.
+2. Change the request method to `POST`.
 3. Input the following URL (API endpoint): http://127.0.0.1:8000/users/
 4. In the Body tab, select JSON from the dropdown and fill in the fields in the following request body:
 ```
@@ -43,7 +43,7 @@ Steps to create a new user on Insomnia:
 
 ![A screenshot showing a successful POST request to create a new user in the  Insomnia application.](./screenshots/insomnia_post_new_user.png)
 
-To retrieve the authetication token for a user account, follow the steps above and create a new POST HTTP request with the username and password in the request body to the following URL: http://localhost:8000/api-token-auth/
+To retrieve the authetication token for a user account, follow the steps above and create a new `POST` HTTP request with the username and password in the request body to the following URL: http://localhost:8000/api-token-auth/
 
 ![A screenshot showing a successful POST request to retrieve a user's authentication token in the Insomnia application.](./screenshots/insomnia_return_token.png)
 
@@ -51,7 +51,7 @@ To retrieve the authetication token for a user account, follow the steps above a
 Steps to create a new project on Insomnia:
 
 1. Create a new HTTP request.
-2. Change the request method to POST.
+2. Change the request method to `POST`.
 3. Input the following URL (API endpoint): http://127.0.0.1:8000/projects/
 4. In the Body tab, select JSON from the dropdown and fill in the fields in the following request body:
 ```
@@ -70,30 +70,30 @@ Steps to create a new project on Insomnia:
 
 ![A screenshot showing a successful POST request to create a new project in the  Insomnia application.](./screenshots/insomnia_post_new_project.png)
 
-To retrieve the details of the project, create a new GET HTTP request to the following URL using the project's ID number: http://127.0.0.1:8000/projects/(project_id)/
+To retrieve the details of the project, create a new `GET` HTTP request to the following URL using the project's ID number: http://127.0.0.1:8000/projects/(project_id)/
 
 ![A screenshot showing a successful GET request to retrieve the details of one project in the Insomnia application.](./screenshots/insomnia_get_one_project.png)
 
 ## Technical 
 ### API Specification
-| HTTP Method |            URL           |                         Purpose                         |        Request Body       | Successful Response Code |              Authentication/Authorisation              | Implemented? |
-|:-----------:|:------------------------:|:-------------------------------------------------------:|:-------------------------:|:------------------------:|:------------------------------------------------------:|:------------:|
-| GET         | :green_book:/projects/   | Returns all projects                                    | N/A                       | 200 OK                   | N/A                                                    | Yes          |
-| POST        | :green_book:/projects/   | Create a new project                                    | [Project object](#project-creation)            | 201 Created              | Must be logged in                                      | Yes          |
-| GET         | :green_book:/projects/1/ | Returns the project with ID of “1”                      | N/A                       | 200 OK                   | N/A                                                    | Yes          |
-| PUT         | :green_book:/projects/1/ | Updates project with ID of “1”                          | [Project object](#project-creation)            | 200 OK                   | Must be logged in Must be the project owner            | Yes          |
-| DELETE      | :green_book:/projects/1/ | Deletes the project with ID of “1”                      | N/A                       | 204 No Content           | Must be logged in Must be the project owner            | Yes          |
-| GET         | :orange_book:/pledges/   | Returns all pledges                                     | N/A                       | 200 OK                   | N/A                                                    | Yes          |
-| POST        | :orange_book:/pledges/   | Create a new pledge                                     | Pledge object (see below) | 201 Created              | Must be logged in Must not be the owner of the project | Yes          |
-| GET         | :orange_book:/pledges/1/ | Get the pledge with ID of “1”                           | N/A                       | 200 OK                   | N/A                                                    | Yes          |
-| PUT         | :orange_book:/pledges/1/ | Updates pledge with ID of “1”                           | Pledge object (see below) | 200 OK                   | Must be logged in Must be the pledge supporter         | Yes          |
-| DELETE      | :orange_book:/pledges/1/ | Deletes the pledge with ID of “1”                       | N/A                       | 204 No Content           | Must be logged in Must be the pledge supporter         | Yes          |
-| GET         | :blue_book:/users/       | Returns all users                                       | N/A                       | 200 OK                   | Must be logged in as a superuser                       | Yes          |
-| POST        | :blue_book:/users/       | Create a new user                                       | [User object](#user-creation)               | 201 Created              | N/A                                                    | Yes          |
-| GET         | :blue_book:/users/1/     | Returns the user with ID of “1”                         | N/A                       | 200 OK                   | N/A                                                    | Yes          |
-| PUT         | :blue_book:/users/1/     | Updates user with ID of “1”                             | [User object](#user-creation)               | 200 OK                   | Must be logged in as user with ID of “1”               | Yes          |
-| DELETE      | :blue_book:/users/1/     | Deletes the user with ID of “1”                         | N/A                       | 204 No Content           | Must be logged in as user with ID of “1”               | Yes          |
-| POST        | /api-token-auth/         | Returns a token for a given valid username and password | [User object](#user-creation)               | 200 OK                   | N/A                                                    | Yes          |
+| HTTP Method | URL                      | Purpose                                                 | Request Body              | Successful Response Code | Authentication/Authorisation                              |
+|-------------|--------------------------|---------------------------------------------------------|---------------------------|--------------------------|-----------------------------------------------------------|
+| GET         | :green_book:/projects/   | Returns all projects                                    | N/A                       | 200 OK                   | N/A                                                       |
+| POST        | :green_book:/projects/   | Create a new project                                    | [Project object](#project-creation)            | 201 Created              | Must be logged in                                         |
+| GET         | :green_book:/projects/1/ | Returns the project with ID of “1”                      | N/A                       | 200 OK                   | N/A                                                       |
+| PUT         | :green_book:/projects/1/ | Updates project with ID of “1”                          | [Project object](#project-creation)            | 200 OK                   | Must be logged in<br>Must be the project owner            |
+| DELETE      | :green_book:/projects/1/ | Deletes the project with ID of “1”                      | N/A                       | 204 No Content           | Must be logged in<br>Must be the project owner            |
+| GET         | :orange_book:/pledges/   | Returns all pledges                                     | N/A                       | 200 OK                   | N/A                                                       |
+| POST        | :orange_book:/pledges/   | Create a new pledge                                     | Pledge object (see below) | 201 Created              | Must be logged in<br>Must not be the owner of the project |
+| GET         | :orange_book:/pledges/1/ | Get the pledge with ID of “1”                           | N/A                       | 200 OK                   | N/A                                                       |
+| PUT         | :orange_book:/pledges/1/ | Updates pledge with ID of “1”                           | Pledge object (see below) | 200 OK                   | Must be logged in<br>Must be the pledge supporter         |
+| DELETE      | :orange_book:/pledges/1/ | Deletes the pledge with ID of “1”                       | N/A                       | 204 No Content           | Must be logged in<br>Must be the pledge supporter         |
+| GET         | :blue_book:/users/       | Returns all users                                       | N/A                       | 200 OK                   | Must be logged in as a superuser                          |
+| POST        | :blue_book:/users/       | Create a new user                                       | [User object](#user-creation)               | 201 Created              | N/A                                                       |
+| GET         | :blue_book:/users/1/     | Returns the user with ID of “1”                         | N/A                       | 200 OK                   | N/A                                                       |
+| PUT         | :blue_book:/users/1/     | Updates user with ID of “1”                             | [User object](#user-creation)               | 200 OK                   | Must be logged in as user with ID of “1”                  |
+| DELETE      | :blue_book:/users/1/     | Deletes the user with ID of “1”                         | N/A                       | 204 No Content           | Must be logged in as user with ID of “1”                  |
+| POST        | /api-token-auth/         | Returns a token for a given valid username and password | [User object](#user-creation)               | 200 OK                   | N/A                                                       |
 
 Pledge request body:
 ```
@@ -108,9 +108,12 @@ Pledge request body:
 #### 
 
 ### Database Schema
+**Note:** The `ProjectUpdate` model and associated views, URLs and serializers have not been implemented yet, however its implementation would be similar to that of the `Pledge` model.
+
 ![The database schema for the Level Launch crowdfunding website.](./screenshots/crowdfunding_erd.png)
 
 ### Future Developments
+- [ ] Add the ability for project owners to publish update blog posts for their project (`ProjectUpdate` model).
 - [ ] Add new superuser permissions allow a superuser to update and delete any project, pledge, or user.
 - [ ] Paginated responses to project and pledge `GET` requests.
 
