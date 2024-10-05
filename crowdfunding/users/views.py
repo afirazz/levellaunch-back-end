@@ -6,10 +6,12 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from .models import CustomUser
 from .serializers import CustomUserSerializer, CustomUserDetailSerializer
-from .permissions import IsUserOrReadOnly
+from .permissions import IsUserOrReadOnly, OnlySuperuserCanView
 
 
 class CustomUserList(APIView):
+    permission_classes = [OnlySuperuserCanView]
+
     def get(self, request):
         users = CustomUser.objects.all()
         serializer = CustomUserSerializer(users, many=True)

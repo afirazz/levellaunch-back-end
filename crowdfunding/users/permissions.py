@@ -6,3 +6,12 @@ class IsUserOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
         return obj == request.user
+    
+
+class OnlySuperuserCanView(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return bool(
+            request.method == 'GET' and
+            request.user and 
+            request.user.is_superuser
+        )
