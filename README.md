@@ -61,7 +61,7 @@ Steps to create a new project on Insomnia:
   "game_type": "{enter your game type}",
   "goal": {enter your project goal},
   "image": "{enter your project image URL}",
-  "is_open": true,
+  "is_open": {true OR false},
   "start_date": "{enter your project start date}",
   "end_date": "{enter your project start date}"
 }
@@ -76,9 +76,36 @@ To retrieve the details of the project, create a new GET HTTP request to the fol
 
 ## Technical 
 ### API Specification
-| URL | HTTP Method | Purpose | Purpose | Request Body | Success Response Code | Authentication/Authorisation |
-| --- | ----------- | ------- | ------- | ------------ | --------------------- | ---------------------------- |
-|     |             |         |         |              |                       |                              |
+| HTTP Method |            URL           |                         Purpose                         |        Request Body       | Successful Response Code |              Authentication/Authorisation              | Implemented? |
+|:-----------:|:------------------------:|:-------------------------------------------------------:|:-------------------------:|:------------------------:|:------------------------------------------------------:|:------------:|
+| GET         | :green_book:/projects/   | Returns all projects                                    | N/A                       | 200 OK                   | N/A                                                    | Yes          |
+| POST        | :green_book:/projects/   | Create a new project                                    | [Project object](#project-creation)            | 201 Created              | Must be logged in                                      | Yes          |
+| GET         | :green_book:/projects/1/ | Returns the project with ID of “1”                      | N/A                       | 200 OK                   | N/A                                                    | Yes          |
+| PUT         | :green_book:/projects/1/ | Updates project with ID of “1”                          | [Project object](#project-creation)            | 200 OK                   | Must be logged in Must be the project owner            | Yes          |
+| DELETE      | :green_book:/projects/1/ | Deletes the project with ID of “1”                      | N/A                       | 204 No Content           | Must be logged in Must be the project owner            | Yes          |
+| GET         | :orange_book:/pledges/   | Returns all pledges                                     | N/A                       | 200 OK                   | N/A                                                    | Yes          |
+| POST        | :orange_book:/pledges/   | Create a new pledge                                     | Pledge object (see below) | 201 Created              | Must be logged in Must not be the owner of the project | Yes          |
+| GET         | :orange_book:/pledges/1/ | Get the pledge with ID of “1”                           | N/A                       | 200 OK                   | N/A                                                    | Yes          |
+| PUT         | :orange_book:/pledges/1/ | Updates pledge with ID of “1”                           | Pledge object (see below) | 200 OK                   | Must be logged in Must be the pledge supporter         | Yes          |
+| DELETE      | :orange_book:/pledges/1/ | Deletes the pledge with ID of “1”                       | N/A                       | 204 No Content           | Must be logged in Must be the pledge supporter         | Yes          |
+| GET         | :blue_book:/users/       | Returns all users                                       | N/A                       | 200 OK                   | Must be logged in as a superuser                       | Yes          |
+| POST        | :blue_book:/users/       | Create a new user                                       | [User object](#user-creation)               | 201 Created              | N/A                                                    | Yes          |
+| GET         | :blue_book:/users/1/     | Returns the user with ID of “1”                         | N/A                       | 200 OK                   | N/A                                                    | Yes          |
+| PUT         | :blue_book:/users/1/     | Updates user with ID of “1”                             | [User object](#user-creation)               | 200 OK                   | Must be logged in as user with ID of “1”               | Yes          |
+| DELETE      | :blue_book:/users/1/     | Deletes the user with ID of “1”                         | N/A                       | 204 No Content           | Must be logged in as user with ID of “1”               | Yes          |
+| POST        | /api-token-auth/         | Returns a token for a given valid username and password | [User object](#user-creation)               | 200 OK                   | N/A                                                    | Yes          |
+
+Pledge request body:
+```
+{
+  "amount": {enter amount pledged},
+  "comment": "{enter pledge comment}",
+  "anonymous": {true OR false},
+  "project": {enter project ID}
+}
+```
+
+#### 
 
 ### Database Schema
 ![The database schema for the Level Launch crowdfunding website.](./screenshots/crowdfunding_erd.png)
@@ -91,7 +118,7 @@ To retrieve the details of the project, create a new GET HTTP request to the fol
 ## Project Requirements
 This crowdfunding project must:
 
-- [x] Be separated into two distinct projects: an API built using the Django Rest Framework and a website built using React. [React front end coming soon!]
+- [x] Be separated into two distinct projects: an API built using the Django Rest Framework and a website built using React. *(AZ Note: Coming soon on the React front end!)*
 - [x] Have a cool name, bonus points if it includes a pun and/or missing vowels.
 - [ ] Have a clear target audience.
 - [x] Have user accounts. A user should have at least the following attributes:
