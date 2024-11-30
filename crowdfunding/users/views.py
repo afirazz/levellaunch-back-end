@@ -10,7 +10,7 @@ from .permissions import IsUserOrReadOnly, OnlySuperuserCanView
 
 
 class CustomUserList(APIView):
-    permission_classes = [OnlySuperuserCanView]
+    # permission_classes = [OnlySuperuserCanView]
 
     def get(self, request):
         users = CustomUser.objects.all()
